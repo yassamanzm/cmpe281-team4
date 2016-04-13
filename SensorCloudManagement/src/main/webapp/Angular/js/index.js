@@ -2,14 +2,17 @@ var cmpe281 = angular.module('cmpe281', [ 'ngRoute' ]);
 
 cmpe281.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/', {
-		templateUrl : 'Angular/projects/Projects/templates/default.html',
+		templateUrl : 'Angular/Projects/templates/default.html',
 		controller : 'loginController'
 	}).when('/login', {
-		templateUrl : 'Angular/projects/Projects/templates/login.html',
+		templateUrl : 'Angular/Projects/templates/login.html',
 		controller : 'loginController'
 	}).when('/signup', {
-		templateUrl : 'Angular/projects/Projects/templates/signup.html',
+		templateUrl : 'Angular/Projects/templates/signup.html',
 		controller : 'signupController'
+	}).when('/home', {
+		templateUrl : 'Angular/Projects/templates/home.html',
+		controller : 'homeController'
 	}).otherwise({
 		redirectTo : '/login'
 	});
