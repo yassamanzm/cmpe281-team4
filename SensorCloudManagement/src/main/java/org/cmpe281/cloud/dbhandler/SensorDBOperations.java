@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 
 import org.json.JSONArray;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
@@ -41,6 +42,15 @@ public class SensorDBOperations {
 			table.insert( (DBObject) JSON.parse((String) barometerReadings.get(i).toString()));
 		}	
 	}
+	
+	
+	public void search(String latitude, String longitude){
+		BasicDBObject bdo = new BasicDBObject();
+		bdo.put("latitude", latitude);
+		bdo.put("longitude", longitude);
+	//	bdo.put
+	}
+	
 	
 	public void closeConnection(){
 		dbClient.close();

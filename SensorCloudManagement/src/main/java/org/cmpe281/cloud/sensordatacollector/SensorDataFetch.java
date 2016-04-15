@@ -10,6 +10,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.cmpe281.cloud.dbhandler.SensorDBOperations;
+
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,19 +31,21 @@ public class SensorDataFetch {
 	@Produces(MediaType.APPLICATION_JSON)
 
 	public Response fetchData(){
+		SensorDBOperations sdo = new SensorDBOperations();
 		ObjectMapper objMap = new ObjectMapper();
 		objMap.setVisibility(PropertyAccessor.ALL, Visibility.ANY);
-		MongoClient db_cl = null;
-		try {
-			db_cl = new MongoClient("mongodb://admin:admin@ds023530.mlab.com:23530/cmpe281project");
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		DB db = db_cl.getDB("database_name");
-		DBCollection tab = db.getCollection("Sensor_Data");
-		BasicDBObject nQuery = new BasicDBObject();
-		//add in db
+		
+//		MongoClient db_cl = null;
+//		try {
+//			db_cl = new MongoClient("mongodb://admin:admin@ds023530.mlab.com:23530/cmpe281project");
+//		} catch (UnknownHostException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		DB db = db_cl.getDB("database_name");
+//		DBCollection tab = db.getCollection("Sensor_Data");
+//		BasicDBObject nQuery = new BasicDBObject();
+//		//add in db
 		JSON json = new JSON();
 		String json_op = json.serialize("kl");
 		return Response.ok(json_op, MediaType.APPLICATION_JSON).build(); 
