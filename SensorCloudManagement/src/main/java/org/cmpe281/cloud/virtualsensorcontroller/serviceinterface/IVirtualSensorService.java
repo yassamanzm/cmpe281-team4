@@ -1,4 +1,4 @@
-package org.cmpe281.cloud.serviceinterface;
+package org.cmpe281.cloud.virtualsensorcontroller.serviceinterface;
 
 import org.cmpe281.cloud.dto.VirtualSensorDTO;
 

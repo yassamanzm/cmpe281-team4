@@ -3,7 +3,7 @@ package org.cmpe281.cloud.routes;
 import javax.validation.Valid;
 
 import org.cmpe281.cloud.dto.VirtualSensorDTO;
-import org.cmpe281.cloud.services.VirtualSensorService;
+import org.cmpe281.cloud.virtualsensorcontroller.services.VirtualSensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
