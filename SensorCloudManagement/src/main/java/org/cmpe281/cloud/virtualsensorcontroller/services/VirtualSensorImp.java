@@ -22,15 +22,12 @@ public class VirtualSensorImp implements IVirtualSensor {
 		vsDBOperations= new VirtualSensorDBOperations();
 	}
 
-	@Override
 	public List<VirtualSensor> getSensorMetadata(String sensorId, String userId) {
 		return vsDBOperations.getVirtualSensorListByUserId(sensorId, userId);
 	}
 
-	@Override
 	public void storeInDB(JSONObject vsJsonObject) {
 		vsDBOperations.storeInDB(vsJsonObject);
 		
 	}
-
 }
