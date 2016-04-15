@@ -48,6 +48,7 @@ public class SensorDataFetch {
 //		//add in db
 		JSON json = new JSON();
 		String json_op = json.serialize("kl");
+		
 		return Response.ok(json_op, MediaType.APPLICATION_JSON).build(); 
 	}
 
