@@ -25,7 +25,7 @@ public class SensorDBOperations {
 		try {
 			this.dbClient = new MongoClient
 					("mongodb://admin:admin@ds023530.mlab.com:23530/cmpe281project");
-			this.database = dbClient.getDB("BarometerData");
+			//this.database = dbClient.getDB("BarometerData");
 			this.table = database.getCollection("SensorData");
 			
 			
