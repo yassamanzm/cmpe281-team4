@@ -46,6 +46,19 @@ public class DBHandler implements IDBHandler{
 		return dbCursor;
 	}
 
+	public DBObject getDocumentFromCollection(String dbCollection, BasicDBObject searchQuery) {
+		this.dbCollection = database.getCollection(dbCollection);
+		DBObject dbObject = this.dbCollection.findOne(searchQuery);
+		return dbObject;
+	}
+
+	public DBObject getDocumentFromCollection(String dbCollection, BasicDBObject searchQuery,
+			BasicDBObject projection) {
+		this.dbCollection = database.getCollection(dbCollection);
+		DBObject dbObject = this.dbCollection.findOne(searchQuery, projection);
+		return dbObject;
+	}
+
 	public void deleteFromCollection(String dbCollection, BasicDBObject searchQuery) {
 		this.dbCollection = database.getCollection(dbCollection);
 		DBObject dbObject = this.dbCollection.findOne(searchQuery);
@@ -60,5 +73,4 @@ public class DBHandler implements IDBHandler{
 		else
 			return true;
 	}
-
 }

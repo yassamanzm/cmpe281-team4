@@ -1,8 +1,8 @@
 package org.cmpe281.cloud.dbhandler;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 
 /**
  * @author Vaishampayan Reddy
@@ -31,6 +31,24 @@ public interface IDBHandler {
 	 * @param projection
 	 */
 	public DBCursor getDocumentsFromCollection(String dbCollection, BasicDBObject searchQuery, BasicDBObject projection);
+
+	/**
+	 * gets one document based on searchQuery
+	 * @param dbCollection
+	 * @param searchQuery
+	 * @param projection
+	 * @return
+	 */
+	public DBObject getDocumentFromCollection(String dbCollection, BasicDBObject searchQuery);
+
+	/**
+	 * gets one document and its details based on projection and searchQuery
+	 * @param dbCollection
+	 * @param searchQuery
+	 * @param projection
+	 * @return
+	 */
+	public DBObject getDocumentFromCollection(String dbCollection, BasicDBObject searchQuery, BasicDBObject projection);
 
 	/**
 	 *  removes the document from the collection based on searchQuery
