@@ -7,12 +7,11 @@ import org.cmpe281.cloud.dbhandler.IDBHandler;
 import org.cmpe281.cloud.dto.UserDTO;
 import org.cmpe281.cloud.dto.UserProfileDTO;
 import org.cmpe281.cloud.manage.exceptions.DuplicateUserException;
+import org.cmpe281.cloud.pojo.User;
 import org.cmpe281.cloud.usermanagement.serviceinterface.IUserManager;
-import org.json.JSONException;
-import org.json.JSONObject;
 
+import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 /**
@@ -24,43 +23,49 @@ public class UserManager implements IUserManager {
 	private static final String mongoDbUrl = "mongodb://admin:admin@ds023530.mlab.com:23530/cmpe281project";
 	private static final String database = "SensorData";
 
-	public UserManager() throws UnknownHostException {
-		dbHandler = new DBHandler(mongoDbUrl, database);
+	private Gson gsonHelper = new Gson();
+
+	public UserManager() {
+		try {
+			dbHandler = new DBHandler(mongoDbUrl, database);
+		}
+		catch(UnknownHostException e) {
+			//
+		}
 	}
 
-	public UserDTO createUser(String user) throws JSONException, DuplicateUserException {
-		JSONObject userJson = new JSONObject(user);
+	public UserDTO createUser(User user) throws DuplicateUserException {
 		BasicDBObject userObject = new BasicDBObject();
 		BasicDBObject searchQuery = new BasicDBObject();
-		searchQuery.append("email", userJson.get("email"));
+		searchQuery.append("email", user.getEmail());
 		if(dbHandler.doesExistInDb("Users", searchQuery)) {
 			//Insert into User Collection
-			userObject.append("email", userJson.get("email"));
-			userObject.append("password", userJson.get("password"));
+			userObject.append("email", user.getEmail());
+			userObject.append("password", user.getPassword());
 			dbHandler.addToCollection("Users", userObject);
 			DBObject userData = dbHandler.getDocumentFromCollection("Users", searchQuery);
 
 			//Insert into UserProfile Collection
 			BasicDBObject userProfileObject = new BasicDBObject();
-			userProfileObject.append("first_name", userJson.get("first_name"));
-			userProfileObject.append("last_name", userJson.get("last_name"));
+			userProfileObject.append("first_name", user.getFirst_name());
+			userProfileObject.append("last_name", user.getLast_name());
 			userProfileObject.append("userid", userData.get("_id"));
 			dbHandler.addToCollection("Users", userObject);
-			//return userData.toString();
-			return null;
+			UserDTO userDTO = gsonHelper.fromJson(userData.toString(), UserDTO.class);
+			return userDTO;
 		}
 		else {
-			throw new DuplicateUserException(userJson.getString("email"));
+			throw new DuplicateUserException(user.getEmail());
 		}
 	}
 
-	public void deleteUser(String userid) {
+	public void deleteUser(User user) {
 	}
 
-	public void updateUser(String user) {
+	public void updateUser(User user) {
 	}
 
-	public UserProfileDTO getUserProfile(String userid) {
+	public UserProfileDTO getUserProfile(User user) {
 		return null;
 	}
 }
