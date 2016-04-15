@@ -1,10 +1,10 @@
-package org.compe281.cloud.services;
+package org.cmpe281.cloud.services;
 
 import org.cmpe281.cloud.datastore.IVirtualSensorRepository;
+import org.cmpe281.cloud.dto.VirtualSensorDTO;
 import org.cmpe281.cloud.enums.SensorState;
 import org.cmpe281.cloud.model.VirtualSensor;
-import org.compe281.cloud.dto.VirtualSensorDTO;
-import org.compe281.cloud.serviceinterface.IVirtualSensorService;
+import org.cmpe281.cloud.serviceinterface.IVirtualSensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

@@ -1,6 +1,6 @@
-package org.compe281.cloud.serviceinterface;
+package org.cmpe281.cloud.serviceinterface;
 
-import org.compe281.cloud.dto.VirtualSensorDTO;
+import org.cmpe281.cloud.dto.VirtualSensorDTO;
 
 /**
  * @author Yassaman

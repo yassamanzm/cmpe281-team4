@@ -1,4 +1,4 @@
-package org.compe281.cloud.dto;
+package org.cmpe281.cloud.dto;
 
 import org.cmpe281.cloud.enums.SensorState;
 import org.hibernate.validator.constraints.NotEmpty;
