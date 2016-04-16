@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.ws.rs.Consumes;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import org.cmpe281.cloud.dbhandler.SensorDBOperations;
 import org.cmpe281.cloud.model.BarometerSensor;
@@ -41,6 +43,7 @@ import com.mongodb.util.JSON;
  */
 @Path("update")
 public class SensorDataCollector {
+	Gson gson = new Gson();
 	@PUT
 
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -102,16 +105,23 @@ public class SensorDataCollector {
 		String temp = null;
 		//String ret = "";
 		String[] columns;
+		ArrayList<BarometerSensor> readings = new ArrayList<>();
 		//BarometerSensor bs = new Barom
 		for(int i = 0; i<barometerReadings.length(); i++){
 			temp = barometerReadings.get(i).toString();
+			temp.replace("[", "");
+			temp.replace("]", "");
 			columns = temp.split(",");
 			BarometerSensor bs = new BarometerSensor(columns[0],columns[1], 
 					columns[2], columns[3],columns[4], columns[7], columns[5], columns[6]);
-			System.out.println(temp);
-
-
+			readings.add(bs);
+			
+			//System.out.println(temp);
 		}
+		String json = gson.toJson(readings);
+		System.out.println("Json "+json);
+		
+		return json;
 
 	}
 
