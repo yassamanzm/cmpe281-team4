@@ -13,6 +13,9 @@ cmpe281.config([ '$routeProvider', function($routeProvider) {
 	}).when('/home', {
 		templateUrl : 'Angular/Projects/templates/home.html',
 		controller : 'homeController'
+	}).when('/home/sensor', {
+		templateUrl : 'Angular/Projects/templates/sensor.html',
+		controller : 'sensorController'
 	}).otherwise({
 		redirectTo : '/login'
 	});

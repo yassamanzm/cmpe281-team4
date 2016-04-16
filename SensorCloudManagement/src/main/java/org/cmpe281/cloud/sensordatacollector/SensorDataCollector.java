@@ -1,44 +1,28 @@
 package org.cmpe281.cloud.sensordatacollector;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-
-import org.cmpe281.cloud.dbhandler.SensorDBOperations;
 import org.cmpe281.cloud.model.BarometerSensor;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.util.JSON;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
 
 /**
  * @author Savani
- * service for updating sensor data in mongodb
+ * service for updating sensor data in mongodb reading from
  * 
  */
 @Path("update")
@@ -105,8 +89,7 @@ public class SensorDataCollector {
 		String temp = null;
 		//String ret = "";
 		String[] columns;
-		ArrayList<BarometerSensor> readings = new ArrayList<>();
-		//BarometerSensor bs = new Barom
+		ArrayList<BarometerSensor> readings = new ArrayList<BarometerSensor>();
 		for(int i = 0; i<barometerReadings.length(); i++){
 			temp = barometerReadings.get(i).toString();
 			temp.replace("[", "");
