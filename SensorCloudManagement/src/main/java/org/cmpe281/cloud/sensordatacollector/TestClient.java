@@ -1,24 +1,19 @@
 package org.cmpe281.cloud.sensordatacollector;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.json.JSONString;
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 
 public class TestClient {
@@ -47,20 +42,47 @@ public class TestClient {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			 
+			
+//			 try {
+//				    //System.out.println("conn + "+System.get);
+//				 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//				 Date date = new Date();
+//				 System.out.println("conn + "+date);
+//				 	URL myURL = new URL("http://erddap.axiomdatascience.com/erddap/tabledap/"
+//				    		+ "cencoos_sensor_service.json?time,latitude,longitude,station,unit,value,parameter&time>=2016-04-15T00:00:00Z&parameter=%22Barometric%20Pressure%22");
+//				    URLConnection myURLConnection = myURL.openConnection();
+//				    
+//				  //  myURLConnection.connect();
+//				    BufferedReader in = new BufferedReader(new InputStreamReader(
+//				    		myURLConnection.getInputStream()));
+//				    String input;
+//				    StringBuilder responseStrBuilder = new StringBuilder();
+//				   
+//				    while ((input = in.readLine()) != null)
+//				        responseStrBuilder.append(input);
+//				   JSONObject str1 = new JSONObject(responseStrBuilder.toString()) ;
+//				    
+//				    System.out.println("string json +  "+str1);
+//			 }
+//				catch (Exception e) { 
+//				    // new URL() failed
+//				    // ...
+//				} 
 			// JSONString jstr = JSON.stringify(str);
 			 
 			// http://localhost:8080/SensorDataCollector/
 				 
 				 Client cl1 = ClientBuilder.newClient();
-				WebTarget tar1 = cl1.target("http://localhost:8080/SensorCloudManagement/sensordata/fetch");
-				System.out.println("In client 1 75");
+			WebTarget tar1 = cl1.target("http://localhost:8080/SensorCloudManagement/sensordata/update");
+				// WebTarget tar1 = cl1.target("http://erddap.axiomdatascience.com/erddap/tabledap/cencoos_sensor_service."
+				// 		+ "json?time,latitude");//,value=time>=&2016-04-13T00:00:00Z
+				 System.out.println("In client 1 75");
 				//String abc = JSON.serialize(obj_json);
 				ObjectMapper objMap = new ObjectMapper();
 				objMap.setVisibility(PropertyAccessor.ALL, Visibility.ANY);
-				Response response = tar1.request().get();
+				Response response = tar1.request().put(Entity.json(json1));
 			//	String a= tar1.request().get().toString();
-				System.out.println(response + "Response");
+				System.out.println(response.toString() + "Response");
 				
 		}
 		public static String readFile(String path, Charset encoding) 
