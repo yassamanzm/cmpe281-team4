@@ -30,11 +30,12 @@ public class SensorDataFetch {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 
-	public Response fetchData(){
-		SensorDBOperations sdo = new SensorDBOperations();
+	public Response fetchData(String input){
+	//	SensorDBOperations sdo = new SensorDBOperations();
+		SensorCollectorImp sci = new SensorCollectorImp();
 		ObjectMapper objMap = new ObjectMapper();
 		objMap.setVisibility(PropertyAccessor.ALL, Visibility.ANY);
-		
+		sci.getSensorData(input);
 //		MongoClient db_cl = null;
 //		try {
 //			db_cl = new MongoClient("mongodb://admin:admin@ds023530.mlab.com:23530/cmpe281project");
@@ -46,7 +47,7 @@ public class SensorDataFetch {
 //		DBCollection tab = db.getCollection("Sensor_Data");
 //		BasicDBObject nQuery = new BasicDBObject();
 //		//add in db
-		JSON json = new JSON();
+	JSON json = new JSON();
 		String json_op = json.serialize("kl");
 		
 		return Response.ok(json_op, MediaType.APPLICATION_JSON).build(); 

@@ -90,10 +90,15 @@ public class SensorDataCollector {
 		//String ret = "";
 		String[] columns;
 		ArrayList<BarometerSensor> readings = new ArrayList<BarometerSensor>();
+		temp = barometerReadings.get(0).toString();
+		System.out.println("...... "+temp );
+		//return temp;
 		for(int i = 0; i<barometerReadings.length(); i++){
 			temp = barometerReadings.get(i).toString();
-			temp.replace("[", "");
-			temp.replace("]", "");
+			System.out.println("...... "+temp );
+			temp.replace("[", " ");
+			temp.replace("]", " ");
+			
 			columns = temp.split(",");
 			BarometerSensor bs = new BarometerSensor(columns[0],columns[1], 
 					columns[2], columns[3],columns[4], columns[7], columns[5], columns[6]);
